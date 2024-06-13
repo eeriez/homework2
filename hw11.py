@@ -17,7 +17,6 @@ def print_matrix(n, m, value):
         row = []
         for j in range(m):
             row.append(value)
-        matrix.append(row)
         print(row)
 
 print_matrix(3, 6, 'ooo')
