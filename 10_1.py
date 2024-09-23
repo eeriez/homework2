@@ -38,5 +38,6 @@ thr2.join()
 thr3.join()
 thr4.join()
 
+
 time_finish2 = datetime.now()
 print(f'Работа потоков {time_finish2 - time_start2}')
