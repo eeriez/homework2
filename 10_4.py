@@ -46,27 +46,32 @@ class Cafe:
 
         while (self.queue.empty() is False) or (guest_pres is True):
             for table in self.tables:
-                if (table.guest is not None) and (table.guest.is_alive() is False):
+                if self.queue.empty() is True:
+                    break
+
+                if table.guest is None:
+                    table.guest = self.queue.get()
+                    print(f'{table.guest.name} вышел(-ла) из очереди и сел(-а) за стол номер {table.number}')
+                    table.guest.start()
+                    table.guest.join()
+
+                if table.guest.is_alive() is False:
                     print(f'{table.guest.name} покушал(-а) и ушёл(ушла)')
                     print(f'Стол номер {table.number} свободен')
                     table.guest = None
 
-            for table in self.tables:
-                if table.guest is None:
-                    table.guest = self.queue.get()
-                    print(f'{table.guest.name} вышел(-ла) из очереди и сел(-а) за стол номер {table.number}')
-
-            for table in self.tables:
                 if table.guest is not None:
                     guest_pres = True
+                else:
+                    guest_pres = False
 
 
 # Создание столов
 tables = [Table(number) for number in range(1, 6)]
 # Имена гостей
 guests_names = [
-'Maria', 'Oleg', 'Vakhtang', 'Sergey', 'Darya', 'Arman',
-'Vitoria', 'Nikita', 'Galina', 'Pavel', 'Ilya', 'Alexandra'
+    'Maria', 'Oleg', 'Vakhtang', 'Sergey', 'Darya', 'Arman',
+    'Vitoria', 'Nikita', 'Galina', 'Pavel', 'Ilya', 'Alexandra'
 ]
 # Создание гостей
 guests = [Guest(name) for name in guests_names]
