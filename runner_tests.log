@@ -1,0 +1,10 @@
+WARNING | Неверный тип данных для объекта Runner
+Traceback (most recent call last):
+  File "C:\Users\eerie\PycharmProjects\pythonProject\12_4.py", line 31, in test_run
+    raise TypeError
+TypeError
+WARNING | Неверная скорость для Runner
+Traceback (most recent call last):
+  File "C:\Users\eerie\PycharmProjects\pythonProject\12_4.py", line 17, in test_walk
+    raise ValueError
+ValueError
