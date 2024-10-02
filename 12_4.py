@@ -13,6 +13,7 @@ class RunnerTest(unittest.TestCase):
     def test_walk(self):
         try:
             obj = Runner('1', -10)
+          
             if obj.speed <= 0:
                 raise ValueError
 
@@ -27,8 +28,10 @@ class RunnerTest(unittest.TestCase):
     def test_run(self):
         try:
             obj = Runner({1: 'aaa', 2: '52454'})
+          
             if type(obj.name) is not str:
                 raise TypeError
+            
             for i in range(10):
                 obj.run()
             self.assertEqual(obj.distance, 100)
