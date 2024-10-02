@@ -21,4 +21,4 @@ class RunnerTest(unittest.TestCase):
         for i in range(10):
             obj1.run()
             obj2.walk()
-        self.assertEqual(obj1.distance != obj2.distance, True)
+        self.assertNotEqual(obj1.distance, obj2.distance)
