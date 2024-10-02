@@ -13,7 +13,7 @@ class RunnerTest(unittest.TestCase):
     def test_walk(self):
         try:
             obj = Runner('1', -10)
-            if obj.speed < 0:
+            if obj.speed <= 0:
                 raise ValueError
 
             for i in range(10):
