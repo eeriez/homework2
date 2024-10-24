@@ -7,7 +7,7 @@ from crud_functions import get_all_products
 
 products = get_all_products()
 
-api = '7572593136:AAGbQvU-4BEfcC8x6qKI4ddux_tkoPNqSyU'
+api = ''
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
