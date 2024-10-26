@@ -14,7 +14,7 @@ async def admin() -> dict:
 
 
 @app.get('/user/{user_id}')
-async def user(user_id: str) -> dict:
+async def user(user_id: int) -> dict:
     return {'message': f'Вы вошли как пользователь № {user_id}'}
 
 
