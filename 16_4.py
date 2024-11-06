@@ -18,8 +18,7 @@ async def get_users() -> List[User]:
 
 
 @app.post('/user/{username}/{age}')
-async def create_user(user: User,
-                      username: Annotated[str, Path(min_length=2, max_length=20, description='Enter username',
+async def create_user(username: Annotated[str, Path(min_length=2, max_length=20, description='Enter username',
                                                     example='User1')],
                       age: Annotated[int, Path(ge=18, le=120, description='Enter age', example='20')]
                       ):
@@ -27,7 +26,11 @@ async def create_user(user: User,
     if len(users) == 0:
         user.id = 1
     else:
-        user.id = len(users) + 1
+        max = 0
+        for user in users:
+            if user.id > max:
+                max = user.id
+        user.id = max + 1
     user.username = username
     user.age = age
     users.append(user)
@@ -42,20 +45,23 @@ async def update_user(
         age: Annotated[int, Path(ge=18, le=120, description='Enter age', example='20')]):
 
     try:
-        user = users[user_id - 1]
-        user.username = username
-        user.age = age
+        for user in users:
+            if user.id == user_id:
+                user.username = username
+                user.age = age
+                return user
     except IndexError:
         raise HTTPException(status_code=404, detail='User was not found')
-
-    return user
 
 
 @app.delete('/user/{user_id}')
 async def delete_user(user_id: Annotated[int, Path(ge=1, le=100, description='Enter ID', example='25')]):
 
     try:
-        users.pop(user_id)
-        return f'User {user_id} has been deleted'
+        for i, user in enumerate(users):
+        if user.id == user_id:
+            del users[i]
+            return f'User {user_id} has been deleted'
+    raise HTTPException(status_code=404, detail='User was not found')
     except IndexError:
         raise HTTPException(status_code=404, detail='User was not found')
