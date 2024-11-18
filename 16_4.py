@@ -60,8 +60,8 @@ async def delete_user(user_id: Annotated[int, Path(ge=1, le=100, description='En
     try:
         for i, user in enumerate(users):
         if user.id == user_id:
-            del users[i]
-            return f'User {user_id} has been deleted'
+            deleted_user = users.pop(i)
+            return deleted_user
     raise HTTPException(status_code=404, detail='User was not found')
     except IndexError:
         raise HTTPException(status_code=404, detail='User was not found')
